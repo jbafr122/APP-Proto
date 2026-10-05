@@ -6,13 +6,8 @@
 	objectVersion = 110;
 	objects = {
 
-/* Begin PBXBuildFile section */
-		5AB917C5307417CE00B71E65 /* JobSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5AB917C4307417CE00B71E65 /* JobSpec.swift */; };
-/* End PBXBuildFile section */
-
 /* Begin PBXFileReference section */
 		5AB917A8307416E100B71E65 /* JobDaily.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = JobDaily.app; sourceTree = BUILT_PRODUCTS_DIR; };
-		5AB917C4307417CE00B71E65 /* JobSpec.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JobSpec.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFileSystemSynchronizedRootGroup section */
@@ -35,7 +30,6 @@
 		5AB9179F307416E100B71E65 = {
 			isa = PBXGroup;
 			children = (
-				5AB917C4307417CE00B71E65 /* JobSpec.swift */,
 				5AB917AA307416E100B71E65 /* JobDaily */,
 				5AB917A9307416E100B71E65 /* Products */,
 			);
@@ -116,7 +110,6 @@
 		5AB917A4307416E100B71E65 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			files = (
-				5AB917C5307417CE00B71E65 /* JobSpec.swift in Sources */,
 			);
 		};
 /* End PBXSourcesBuildPhase section */
