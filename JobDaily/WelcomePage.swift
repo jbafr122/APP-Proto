@@ -10,38 +10,39 @@ import SwiftUI
 
 struct WelcomePage: View {
     var body: some View {
-        VStack{
-            Spacer()
-            ZStack{
-                Image(systemName: "circle.fill")
-                    .foregroundStyle(.black)
-                .font(.system(size: 90))
-                Text("Logo Here") // Message should be seen within the circle to represent where the logo goes
-                    .foregroundStyle(.white)
-            }
-            // shorten the gap between these two
-            Text("Job Daily")
-                .font(.largeTitle)
-                .fontWeight(.bold)
-            Spacer()
-            Button("Get Started") {
-                // Takes user to account creation
-                // TODO: Make it to where the button is at the bottom of the screen and takes up the width of the screen
-            }
-            .font(.headline)
-                    .foregroundColor(.white)
-                    .padding()
-                    .frame(maxWidth: .infinity) //  Expands to fill all available horizontal space
-                    .background(Color.black)
-                    .cornerRadius(10)
-            HStack{
-                Text("Already have an account?")
-                Button("Log In"){
-                    // Send the user to the log in screen
+        NavigationStack{
+            VStack{
+                Spacer()
+                ZStack{
+                    Image(systemName: "circle.fill")
+                        .foregroundStyle(.black)
+                        .font(.system(size: 90))
+                    Text("Logo Here") // Message should be seen within the circle to represent where the logo goes
+                        .foregroundStyle(.white)
                 }
-                .tint(.blue)
+                Text("Job Daily")
+                    .font(.largeTitle)
+                    .fontWeight(.bold)
+                Spacer()
+                NavigationLink(destination: CreateAccount()) {
+                    Text("Get Started")
+                        .font(.headline)
+                        .foregroundColor(.white)
+                        .padding()
+                        .frame(maxWidth: .infinity)
+                        .background(Color.black)
+                        .cornerRadius(10)
+                }
+                HStack{
+                    Text("Already have an account?")
+                    NavigationLink(destination: Login()) {
+                        Text("Log In")
+                            .padding()
+                    }
+                    .tint(.blue)
+                }
+                
             }
-            
         }
     }
 }
