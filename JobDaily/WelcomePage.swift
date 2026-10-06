@@ -25,19 +25,21 @@ struct WelcomePage: View {
                     .fontWeight(.bold)
                 Spacer()
                 NavigationLink(destination: CreateAccount()) {
-                    Text("Get Started")
+                    Text("Get Started ->")
                         .font(.headline)
                         .foregroundColor(.white)
                         .padding()
                         .frame(maxWidth: .infinity)
                         .background(Color.black)
                         .cornerRadius(10)
+                        .padding()
                 }
                 HStack{
                     Text("Already have an account?")
                     NavigationLink(destination: Login()) {
                         Text("Log In")
-                            .padding()
+                            .fontWeight(.bold)
+                            .foregroundStyle(.black)
                     }
                     .tint(.blue)
                 }
