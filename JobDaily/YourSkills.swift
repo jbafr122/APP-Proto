@@ -11,7 +11,7 @@ import SwiftUI
 
 struct YourSkills: View {
     var body: some View {
-        Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
+        ProgressHeader(title: "Your Skills", subtitle: "Enter your skills and experiences", currentStep: 2, totalSteps: 4)
     }
 }
 
