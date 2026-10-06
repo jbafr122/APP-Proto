@@ -6,15 +6,17 @@
 //
 //  Created by Jeremiah Franklin on 10/5/26.
 //  Responsible for account creation after the welcome splash page
+// Jeremiah working on this
 
 import SwiftUI
 
 struct CreateAccount: View {
     var body: some View {
-        VStack{
-            Text("Hello, World!")
-            Text("Hello, World!")
-            Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
+        NavigationStack {
+            VStack{
+                ProgressHeader(title: "TEST", subtitle: "TEST STEP", currentStep: 1, totalSteps: 4)
+                Text("Hello")
+            }
         }
     }
 }
