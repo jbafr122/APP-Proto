@@ -8,9 +8,13 @@
 import SwiftUI
 
 struct ResumeUpload: View {
+    @State private var isImporting = false
+    @State private var selectedFileURL: URL?
+    
     var body: some View {
-        Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
+        
     }
+
 }
 
 #Preview {
