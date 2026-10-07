@@ -37,7 +37,7 @@ struct ProgressHeader: View {
             // Description or subheading for step
             Text(subtitle)
                 .font(.title2)
-                .frame(maxWidth: .infinity, alignment: .leading)                    .font(.subheadline)
+                .frame(maxWidth: .infinity, alignment: .leading)
         }
         .padding(.horizontal)
         .padding(.top, 16)

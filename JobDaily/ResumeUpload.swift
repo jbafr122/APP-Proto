@@ -78,7 +78,7 @@ struct ResumeUpload: View {
                                 .padding(.horizontal, 8)
                                 .padding(.vertical, 4)
                                 .foregroundStyle(.black)
-                                .background(Color.gray).opacity(0.36)
+                                .background(Color.gray.opacity(0.3))
                                 .cornerRadius(25)
                         }
                         .frame(maxWidth: .infinity, alignment: .leading)
