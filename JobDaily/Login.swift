@@ -4,14 +4,13 @@
 //
 //  Created by Jeremiah Franklin on 10/5/26.
 //  User inputs their credentials and skips onboarding to reach the app home page
-// Jeremiah working on this one
 
 import SwiftUI
 
 struct Login: View {
     @State private var username: String = ""
     @State private var password: String = ""
-    @State private var hiding: Bool = true
+    @State private var hiding: Bool = true // true by default and changes when the user presses the eye icon
     
     var body: some View {
         NavigationStack {
@@ -24,16 +23,22 @@ struct Login: View {
                 // Add space in between
                     .frame(maxWidth: .infinity, alignment: .leading)
                     .frame(height: 40)
+                    .padding(.horizontal)
+                
                 TextField("", text: $username)
                     .textFieldStyle(.roundedBorder)
-                    .foregroundStyle(.gray)
+                    .foregroundStyle(.black)
+                    .padding(.horizontal)
+                
                 Text("Password")
                 // Add space in between
                     .frame(maxWidth: .infinity, alignment: .leading)
+                    .padding(.horizontal)
                 ZStack{
                     TextField("", text: $password)
                         .textFieldStyle(.roundedBorder)
-                        .foregroundStyle(.gray)
+                        .foregroundStyle(.black)
+                        .padding(.horizontal)
                     // Add the hashing eye password button thing
                     // TODO: Make it to where the password is hashed when hiding is true and not hashed otherwise
                     Image(systemName: hiding ? "eye.slash.fill" : "eye.fill")
@@ -55,6 +60,7 @@ struct Login: View {
                         .padding()
                 }
                 
+                // To create account screen
                 HStack {
                     Text("Don't have an account?")
                     NavigationLink (destination: CreateAccount()) {
@@ -70,10 +76,7 @@ struct Login: View {
     }
 }
 
-    
-    
-    
-    
-    #Preview {
-        Login()
-    }
+
+#Preview {
+    Login()
+}

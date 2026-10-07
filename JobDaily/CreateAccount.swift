@@ -6,7 +6,6 @@
 //
 //  Created by Jeremiah Franklin on 10/5/26.
 //  Responsible for account creation after the welcome splash page
-// Jeremiah working on this
 
 import SwiftUI
 // TODO: Add red borders if user input is invalid on account creation attempt with a footnote stating what the error is in red
@@ -21,10 +20,11 @@ struct CreateAccount: View {
     @State var email: String = ""
     @State var password: String = ""
     @State var passwordConf: String = ""
-    @State private var hiding: Bool = true
+    @State private var hiding: Bool = true // The text in the field is hashed by default
     @State private var showAlert = false
     @State private var isLoading = false
     @State private var nextScreen = false
+    @State private var complete = false
     
     var body: some View {
         NavigationView {
@@ -69,34 +69,48 @@ struct CreateAccount: View {
                 // Text Fields for the user to input information
                 VStack(alignment: .leading, spacing: 10) {
                     Text("First Name*")
+                        .padding(.horizontal)
                     TextField("", text: $firstName)
                         .textFieldStyle(.roundedBorder)
-                        .foregroundStyle(.gray)
+                        .foregroundStyle(.black)
+                        .padding(.horizontal)
                     
                     Text("Last Name*")
+                        .padding(.horizontal)
                     TextField("", text: $lastName)
                         .textFieldStyle(.roundedBorder)
-                        .foregroundStyle(.gray)
+                        .foregroundStyle(.black)
+                        .padding(.horizontal)
                     
                     Text("Email*")
+                        .padding(.horizontal)
                     TextField("", text: $email)
                         .textFieldStyle(.roundedBorder)
-                        .foregroundStyle(.gray)
+                        .foregroundStyle(.black)
+                        .padding(.horizontal)
                     
+                    // Secure Fields for password and password confirmation will go from hashed to not hashed when the user presses the eye icon in the text field
                     Text("Password*")
+                        .padding(.horizontal)
                     ZStack {
-                        TextField("", text: $password)
+                        SecureField("", text: $password)
                             .textFieldStyle(.roundedBorder)
-                            .foregroundStyle(.gray)
+                            .foregroundStyle(.black)
+                            .padding(.horizontal)
+                        
                         Image(systemName: hiding ? "eye.slash.fill" : "eye.fill")
                             .frame(maxWidth: .infinity, alignment: .trailing)
                             .padding()
                     }
                     Text("Confirm Password*")
+                        .padding(.horizontal)
+                    
                     ZStack {
-                        TextField("", text: $passwordConf)
-                        //.border(.gray, width: 2)
-                            .cornerRadius(12)
+                        SecureField("", text: $passwordConf)
+                            .textFieldStyle(.roundedBorder)
+                            .foregroundStyle(.black)
+                            .padding(.horizontal)
+                        
                         Image(systemName: hiding ? "eye.slash.fill" : "eye.fill")
                             .frame(maxWidth: .infinity, alignment: .trailing)
                             .padding()
@@ -104,21 +118,24 @@ struct CreateAccount: View {
                     .padding(.bottom, 10)
                     
                 }
+                // TODO: The next page should not be accessible until all fields are filled
+                // Gray = Not all spots filled / errors present
+                // Black = User able to attempt login
                 NavigationLink(destination: ResumeUpload()){
-                    
                     Text("Continue->")
+                        .font(.headline)
+                        .foregroundColor(.white)
+                        .padding()
                         .frame(maxWidth: .infinity)
+                    //                        .background(!complete ? Color.gray : Color.black)
+                        .background(Color.black)
                         .cornerRadius(10)
-                        .tint(.black)
-                        .fontWeight(.bold)
-                    
-                    
+                        .padding()
                 }
             }
         }
         
     }
-    
 }
 
 // When the user attempts to create an account, this function validates if the values put into the fields are valid, makes the LoadingOverlay appear and either

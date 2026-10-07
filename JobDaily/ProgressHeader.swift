@@ -4,7 +4,6 @@
 //
 //  Created by Jeremiah Franklin on 10/5/26.
 //  Reusable bar and title ontop to illustrate what step the user is at during the onboarding
-// Jeremiah working on this
 
 import SwiftUI
 

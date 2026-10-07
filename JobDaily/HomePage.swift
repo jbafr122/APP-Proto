@@ -9,7 +9,28 @@ import SwiftUI
 
 struct HomePage: View {
     var body: some View {
-        Text("Home Page")
+        VStack{
+            Text("Job advice here")
+                .padding(.top)
+            Spacer()
+            Image(systemName: "person.fill")
+                .font(.system(size: 50))
+            Text("Hello User")
+            Spacer()
+            HStack{
+                VStack{
+                    Image(systemName: "document")
+                    Text("Application Feed")
+                }
+                .padding(.horizontal)
+                Spacer()
+                VStack{
+                    Image(systemName: "clock.badge.fill")
+                    Text("Application Status")
+                }
+                .padding(.horizontal)
+            }
+        }
     }
 }
 

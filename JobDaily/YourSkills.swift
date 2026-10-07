@@ -25,23 +25,20 @@ struct YourSkills: View {
         CategoryItem(name: "Swift"),
         CategoryItem(name: "Rust")
     ]
-    
     @State private var searchText: String = ""
-    
     
     var body: some View {
         NavigationStack{
             ProgressHeader(title: "Your Skills", subtitle: "Enter your relevant skills. \nSwipe to delete", currentStep: 2, totalSteps: 4)
-            
                 .padding(.horizontal)
             
+            // TextField that allows the user to manually type and add skills by pressing return
             HStack {
                 Image(systemName: "magnifyingglass")
                 TextField("Add Skill...", text: $searchText)
                     .onSubmit {
                         guard !searchText.isEmpty else { return }
-                            addItem(newAddition: searchText)
-                            var newCategory = CategoryItem(name: searchText)
+                        addItem(newAddition: searchText)
                     }
             }
             .autocorrectionDisabled()
@@ -50,21 +47,20 @@ struct YourSkills: View {
             .cornerRadius(10)
             .padding(.horizontal)
             
+            // List each category in ListView
             List (){
-                
                 ForEach(categories, id: \.self) { category in
                     Text(category.name)
-
                 }
                 .onDelete(perform: deleteItems)
-                    .padding(.horizontal, 20)
-                    .padding(.vertical, 12)
-                    .frame(maxWidth: .infinity, alignment: .leading)
-                    .background(Color.gray.opacity(0.1))
-                    .clipShape(Capsule())
-                    .listRowBackground(Color.clear)
-                    .listRowSeparator(.hidden)
-                    .listRowInsets(EdgeInsets(top: 6, leading: 16, bottom: 6, trailing: 16))
+                .padding(.horizontal, 20)
+                .padding(.vertical, 12)
+                .frame(maxWidth: .infinity, alignment: .leading)
+                .background(Color.gray.opacity(0.1))
+                .clipShape(Capsule())
+                .listRowBackground(Color.clear)
+                .listRowSeparator(.hidden)
+                .listRowInsets(EdgeInsets(top: 6, leading: 16, bottom: 6, trailing: 16))
             }
             
             .scrollContentBackground(.hidden)
@@ -93,16 +89,20 @@ struct YourSkills: View {
             }
             
         }
+        // raises alert if there are duplicates attempted to be entered
         .alert("Duplicate Text", isPresented: $showDuplicateAlert) {
             Button("OK", role: .cancel) {}
         } message: {
             Text("'\(searchText)' is already added.")
         }
     }
-    private func deleteItems(at offsets: IndexSet) {
-            categories.remove(atOffsets: offsets)
-        }
     
+    // Helps in the delete on swipe in the listview
+    private func deleteItems(at offsets: IndexSet) {
+        categories.remove(atOffsets: offsets)
+    }
+    
+    // Helps with adding item to the list and prevents duplicates
     private func addItem (newAddition: String) {
         let isDuplicate = categories.contains { (category: CategoryItem) in category.name.caseInsensitiveCompare(searchText) == .orderedSame}
         
@@ -113,13 +113,11 @@ struct YourSkills: View {
             categories.append(CategoryItem(name: searchText))
             searchText = ""
         }
-        
-        
     }
 }
-    
-    
-    
+
+
+
 
 
 #Preview {

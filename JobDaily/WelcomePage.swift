@@ -4,7 +4,6 @@
 //
 //  Created by Jeremiah Franklin on 10/5/26.
 //  The first screen seen by the user. Asks if the user wants to either log in or create an account
-// Jeremiah working on this one
 
 import SwiftUI
 
@@ -24,6 +23,8 @@ struct WelcomePage: View {
                     .font(.largeTitle)
                     .fontWeight(.bold)
                 Spacer()
+                
+                // User decides to press create account
                 NavigationLink(destination: CreateAccount()) {
                     Text("Get Started ->")
                         .font(.headline)
@@ -34,6 +35,8 @@ struct WelcomePage: View {
                         .cornerRadius(10)
                         .padding()
                 }
+                
+                // Log in option
                 HStack{
                     Text("Already have an account?")
                     NavigationLink(destination: Login()) {
