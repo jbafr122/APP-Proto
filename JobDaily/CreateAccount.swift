@@ -1,14 +1,4 @@
-// xcode: set sdk=iOS
-
-//
-//  CreateAccount.swift
-//  JobDaily
-//
-//  Created by Jeremiah Franklin on 10/5/26.
-//  Responsible for account creation after the welcome splash page
-
 import SwiftUI
-// TODO: Add red borders if user input is invalid on account creation attempt with a footnote stating what the error is in red
 
 struct CreateAccount: View {
     let title: String = "Create an Account"
@@ -20,7 +10,9 @@ struct CreateAccount: View {
     @State var email: String = ""
     @State var password: String = ""
     @State var passwordConf: String = ""
-    @State private var hiding: Bool = true // The text in the field is hashed by default
+    
+    @State private var passwordHiding: Bool = true
+    @State private var passwordConfHiding: Bool = true
     @State private var showAlert = false
     @State private var isLoading = false
     @State private var nextScreen = false
@@ -35,7 +27,6 @@ struct CreateAccount: View {
                     .padding(.top, 20)
                 
                 HStack(spacing: 125) {
-                    // For Google Account linking
                     Button("Google"){
                         showAlert = true
                     }
@@ -43,12 +34,10 @@ struct CreateAccount: View {
                     .foregroundColor(.black)
                     .alert("TODO: IMPLEMENT GOOGLE AUTH", isPresented: $showAlert) {
                         Button("OK", role: .cancel){}
-                    }
-                    message: {
+                    } message: {
                         Text("GOOGLE AUTH NOT IMPLEMENTED AT THIS TIME")
                     }
                     
-                    // For Apple Account Linking
                     Button("Apple"){
                         showAlert = true
                     }
@@ -57,101 +46,104 @@ struct CreateAccount: View {
                     .foregroundColor(.black)
                     .alert("TODO: IMPLEMENT GOOGLE AUTH", isPresented: $showAlert) {
                         Button("OK", role: .cancel){}
-                    }
-                    message: {
+                    } message: {
                         Text("APPLE AUTH NOT IMPLEMENTED AT THIS TIME")
                     }
                 }
                 .padding(.bottom, 10)
                 Spacer()
-                // TODO: Create the "----- or -----" under the Google and Apple and above the fields
                 
-                // Text Fields for the user to input information
                 VStack(alignment: .leading, spacing: 10) {
-                    Text("First Name*")
-                        .padding(.horizontal)
+                    Text("First Name*").padding(.horizontal)
                     TextField("", text: $firstName)
                         .textFieldStyle(.roundedBorder)
                         .foregroundStyle(.black)
                         .padding(.horizontal)
                     
-                    Text("Last Name*")
-                        .padding(.horizontal)
+                    Text("Last Name*").padding(.horizontal)
                     TextField("", text: $lastName)
                         .textFieldStyle(.roundedBorder)
                         .foregroundStyle(.black)
                         .padding(.horizontal)
                     
-                    Text("Email*")
-                        .padding(.horizontal)
+                    Text("Email*").padding(.horizontal)
                     TextField("", text: $email)
                         .textFieldStyle(.roundedBorder)
                         .foregroundStyle(.black)
                         .padding(.horizontal)
+                        .textContentType(.emailAddress)
+                        .autocorrectionDisabled(true)
                     
-                    // Secure Fields for password and password confirmation will go from hashed to not hashed when the user presses the eye icon in the text field
-                    Text("Password*")
-                        .padding(.horizontal)
-                    ZStack {
-                        SecureField("", text: $password)
-                            .textFieldStyle(.roundedBorder)
-                            .foregroundStyle(.black)
-                            .padding(.horizontal)
+                    Text("Password*").padding(.horizontal)
+                    HStack {
+                        Group {
+                            if passwordHiding {
+                                SecureField("Enter Password", text: $password)
+                            } else {
+                                TextField("Enter Password", text: $password)
+                            }
+                        }
+                        .autocorrectionDisabled(true)
+                        .textInputAutocapitalization(.never)
+                        .textContentType(.newPassword)
                         
-                        Image(systemName: hiding ? "eye.slash.fill" : "eye.fill")
-                            .frame(maxWidth: .infinity, alignment: .trailing)
-                            .padding()
+                        Button(action: { passwordHiding.toggle() }) {
+                            Image(systemName: passwordHiding ? "eye.slash.fill" : "eye.fill")
+                                .foregroundColor(.gray)
+                        }
                     }
-                    Text("Confirm Password*")
-                        .padding(.horizontal)
+                    .padding(.horizontal, 10)
+                    .padding(.vertical, 8)
+                    .background(Color(.systemBackground))
+                    .overlay(RoundedRectangle(cornerRadius: 6).stroke(Color.gray.opacity(0.3), lineWidth: 1))
+                    .padding(.horizontal)
                     
-                    ZStack {
-                        SecureField("", text: $passwordConf)
-                            .textFieldStyle(.roundedBorder)
-                            .foregroundStyle(.black)
-                            .padding(.horizontal)
+                    // Password Confirmation reverts to plain text upon clicking on the field
+                    Text("Confirm Password*").padding(.horizontal)
+                    HStack {
+                        Group {
+                            if passwordConfHiding {
+                                SecureField("Password Confirmation", text: $passwordConf)
+                            } else {
+                                TextField("Password Confirmation", text: $passwordConf)
+                            }
+                        }
+                        .autocorrectionDisabled(true)
+                        .textInputAutocapitalization(.never)
+                        .textContentType(.newPassword)
                         
-                        Image(systemName: hiding ? "eye.slash.fill" : "eye.fill")
-                            .frame(maxWidth: .infinity, alignment: .trailing)
-                            .padding()
+                        Button(action: { passwordConfHiding.toggle() }) {
+                            Image(systemName: passwordConfHiding ? "eye.slash.fill" : "eye.fill")
+                                .foregroundColor(.gray)
+                        }
                     }
+                    .padding(.horizontal, 10)
+                    .padding(.vertical, 8)
+                    .background(Color(.systemBackground))
+                    .overlay(RoundedRectangle(cornerRadius: 6).stroke(Color.gray.opacity(0.3), lineWidth: 1))
+                    .padding(.horizontal)
                     .padding(.bottom, 10)
-                    
                 }
-                // TODO: The next page should not be accessible until all fields are filled
-                // Gray = Not all spots filled / errors present
-                // Black = User able to attempt login
+                
                 NavigationLink(destination: ResumeUpload()){
                     Text("Continue->")
                         .font(.headline)
                         .foregroundColor(.white)
                         .padding()
                         .frame(maxWidth: .infinity)
-                    //                        .background(!complete ? Color.gray : Color.black)
-                        .background(Color.black)
+                        .background(allFieldsFilled() ? Color.gray : Color.black)
                         .cornerRadius(10)
                         .padding()
                 }
+                .disabled(allFieldsFilled())
             }
         }
         
     }
+    private func allFieldsFilled() -> Bool {
+        return firstName.isEmpty || lastName.isEmpty || email.isEmpty || password.isEmpty || passwordConf.isEmpty
+    }
 }
-
-// When the user attempts to create an account, this function validates if the values put into the fields are valid, makes the LoadingOverlay appear and either
-
-// Inputs valid - move onto the next step
-
-// Inputs not valid - the value not valid has the text box in red and redirects them back to this screen
-
-func validate () {
-    
-}
-
-func simulateLoading() {
-    
-}
-
 
 #Preview {
     CreateAccount()
