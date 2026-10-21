@@ -49,7 +49,7 @@ struct Login: View {
                 // Add forgot password button under text field
                 
                 // TODO: Make it to where the Log In button is pressable and black if both fields are filled and grey and unpressable otherwise
-                NavigationLink(destination: HomePage()){
+                NavigationLink(destination: TabControl()){
                     Text("Log In")
                         .font(.headline)
                         .foregroundColor(.white)
