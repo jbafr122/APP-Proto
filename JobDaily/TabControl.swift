@@ -6,7 +6,7 @@
 //
 
 import SwiftUI
-
+// Tab Manager for Home Screen
 struct TabControl: View {
     var body: some View {
         TabView {

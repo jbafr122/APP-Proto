@@ -6,6 +6,8 @@
 //
 
 import SwiftUI
+// Loaded job postings. Allows the user to save them and apply
+// TODO: Create a separate Job struct file for final version
 
 struct Job: Identifiable {
     let id = UUID()

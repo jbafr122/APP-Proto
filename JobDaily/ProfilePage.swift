@@ -3,7 +3,7 @@
 //  JobDaily
 //
 //  Created by Jeremiah Franklin on 10/20/26.
-//
+//  View for user profile (need more input on design)
 
 import SwiftUI
 

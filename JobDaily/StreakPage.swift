@@ -13,7 +13,7 @@ struct StreakPage: View {
         VStack (alignment: .center){
             Image(systemName: "flame")
                 .font(.system(size: 60, weight: .bold))
-            Text("14 Day Streak")
+            Text("12 Day Streak")
                 .font(.title)
             Text("Nice work showing up, your next tip unlocks tomorrow")
                 .font(.title3)

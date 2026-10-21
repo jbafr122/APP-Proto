@@ -3,7 +3,7 @@
 //  JobDaily
 //
 //  Created by Jeremiah Franklin on 10/20/26.
-//
+//  Displays the daily tip
 
 import SwiftUI
 

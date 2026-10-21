@@ -3,7 +3,7 @@
 //  JobDaily
 //
 //  Created by Jeremiah Franklin on 10/20/26.
-//
+//  Job Specification screen for the edit button on the JobPage view
 
 import SwiftUI
 

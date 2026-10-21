@@ -3,7 +3,8 @@
 //  JobDaily
 //
 //  Created by Jeremiah Franklin on 10/20/26.
-//
+//  Allows the user to modify the status of each application, search for indivual entries and filter by category
+// TODO: Create an individual file for the enm and Job struct to clean up the code
 
 import SwiftUI
 
@@ -195,7 +196,7 @@ struct TrackerPage: View {
         }
     }
     
-    // Safely removes items from trackedJobs by ID, even when a filter or search term is applied
+    // Similar to method from hw. Remove from trackedJobs even when filter is applied
     private func deleteJob(at offsets: IndexSet) {
         let itemsToDelete = offsets.map { filteredJobs[$0].id }
         trackedJobs.removeAll { job in itemsToDelete.contains(job.id) }
